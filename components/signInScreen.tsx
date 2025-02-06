@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import credentials from "../credentials.json";
 
-import { NavigationProp } from '@react-navigation/native';
+type RootStackParamList = {
+  SignIn: undefined;
+  Home: undefined;
+};
 
-const SignInScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, "SignIn">;
 
-  const validateInput = () => {
+type Props = {
+  navigation: SignInScreenNavigationProp;
+};
+
+const SignInScreen: React.FC<Props> = ({ navigation }) => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const validateInput = (): string => {
     const usernameValid = username.length >= 5;
-    const passwordValid = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/.test(password);
+    const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
     
     if (!usernameValid) return "Username must be at least 5 characters long.";
     if (!passwordValid) return "Password must be at least 8 characters with an uppercase, lowercase, number, and special character.";
@@ -21,12 +31,7 @@ const SignInScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const error = validateInput();
     if (error) return Alert.alert("Invalid Input", error);
     
-    interface Credential {
-      username: string;
-      password: string;
-    }
-
-    const user: Credential | undefined = credentials.users.find((cred: Credential) => cred.username === username);
+    const user = credentials.users.find((cred: { username: string; password: string }) => cred.username === username);
     if (!user) return Alert.alert("Error", "Username not found.");
     if (user.password !== password) return Alert.alert("Error", "Incorrect password.");
     
