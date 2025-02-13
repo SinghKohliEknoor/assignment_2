@@ -35,7 +35,7 @@ const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: "#222", // Dark background for the tab bar
+    backgroundColor: "#222", 
     paddingBottom: 5,
     height: 60,
   },
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   header: {
-    backgroundColor: "lightblue", // Custom header background color
+    backgroundColor: "lightblue", 
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "black", // White text for header
+    color: "black", 
   },
 });
 
