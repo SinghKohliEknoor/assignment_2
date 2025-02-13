@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
-const HomeScreen: React.FC = () => {
+const HomeScreen = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Calgary" options={{

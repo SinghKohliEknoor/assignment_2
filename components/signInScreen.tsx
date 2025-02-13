@@ -18,7 +18,7 @@ const SignInScreen: React.FC<Props> = ({ navigation }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const validateInput = (): string => {
+  const validateInput = () => {
     const usernameValid = username.length >= 5;
     const passwordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
     
